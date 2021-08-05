@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+    <p>
+      <form action="{{url_for('vote.result', oid=oid, pid=pid)}}" method="post">
+      <div style="overflow-x:auto;">
+      <table class="table">
+      <tr class="thead">
+        <th> <a href="/pollinfo/{{pid}}/{{oid}}?order_by=id&order={{order}}">Sl.No.</a> </th>
+        <th> <a href="/pollinfo/{{pid}}/{{oid}}?order_by=name&order={{order}}">Item/Candidate Name</a>  </th>
+        <th> Description  </th>
+        <th> Vote!  </th>
+      </tr>
+      {% for id, name, description in polls %}
+      <tr class="trow">
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td><input type="radio" id="choice" name="choice" value={{id}}></td>
+      </tr>
+      {%endfor%}
+      </table>
+      <div class = "side_div">
+        <p style="color:White; font-family: sans-serif;">
+        <input type = "submit" value = "Submit Vote">
+        </form>
+        </p>
+        <p style="color:White; font-family: sans-serif;">
+        <a href="{{url_for('vote.editpoll', pid=pid, oid=oid)}}">Click here to edit this poll</a>
+      </div>
+    </p>
+{% endblock %}    

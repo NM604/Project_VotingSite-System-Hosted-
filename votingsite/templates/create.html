@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+     <div class="bottom_div">
+      <p style="color:White; font-family: sans-serif;">
+      <form method = "post" action = "/createuser">
+      <label for = "username" style="color:White; font-family: Arial, Helvetica, sans-serif;">Enter your username</label>
+      <br/>
+      <input name = "username" type = "text" id = "username" required/>
+      <br/>
+      <br/>
+      <label for = "password" style="color:White; font-family: Arial, Helvetica, sans-serif;">Enter your password</label>
+      <br/>
+      <input name = "password" type = "text" id = "password" required/>
+      <br/>
+      <br/>
+      <input type = "submit" value = "Submit">
+      </form>
+      <p style="color:White; font-family: sans-serif;">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            {{message}}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      </p>
+     </div>
+{% endblock %}

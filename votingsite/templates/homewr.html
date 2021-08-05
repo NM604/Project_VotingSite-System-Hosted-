@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body %}
+  <p>
+    <div class="top_div" style="overflow-x:auto;">
+    <table class="table">
+    <tr class="thead">
+      <th> <a href="/homewr/{{oid}}?order_by=id&order={{order}}">Sl.No.</a> </th>
+      <th> <a href="/homewr/{{oid}}?order_by=name&order={{order}}">Poll-Name</a>  </th>
+      <th> <a href="/homewr/{{oid}}?order_by=created&order={{order}}">Created On</a>  </th>
+      <th> Description  </th>
+      <th> Results  </th>
+     </tr>
+     {% for id, name, cdate, description in polls %}
+     <tr class="trow">
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{cdate}}</td>
+        <td>{{description}}</td>
+        <td>
+        <table style="width:100%">
+        <tr class="thead">
+        <th>Item/Candidate Name</td>
+        <th>Votes</td>
+        </tr>
+        {% for item, votes, pid in result %}
+        {% if pid == id %}
+        <tr class="tdata">
+        <td>{{item}}</td>
+        <td>{{votes}}</td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+        </table>
+        </td>
+     </tr>
+     {%endfor%}
+     </table>
+   </p>
+   <div class = "side_div">
+   <p style="color:White; font-family: sans-serif;">
+    <a href="{{url_for('vote.createpoll', oid=oid)}}">Create your own Poll!</a>
+   </p>
+   </div>
+   </div>
+{% endblock %}

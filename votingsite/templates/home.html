@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+  <p>
+    <div class="top_div" style="overflow-x:auto;">
+    <table class="table">
+    <tr class="thead">
+      <th> <a href="/home/{{oid}}?order_by=id&order={{order}}">Sl.No.</a> </th>
+      <th> <a href="/home/{{oid}}?order_by=name&order={{order}}">Poll-Name</a>  </th>
+      <th> <a href="/home/{{oid}}?order_by=created&order={{order}}">Created On</a>  </th>
+      <th> Description  </th>
+      <th> Participate  </th>
+     </tr>
+     {% for id, name, cdate, description in polls %}
+     <tr class="trow">
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{cdate}}</td>
+        <td>{{description}}</td>
+        <td><a href="{{url_for('vote.pollinfo', pid=id, oid=oid)}}">Vote!</a> </td>
+     </tr>
+     {%endfor%}
+     </table>
+   </p>
+   <div class = "side_div">
+   <p style="color:White; font-family: sans-serif;">
+    <a href="{{url_for('vote.createpoll', oid=oid)}}">Create your own Poll!</a>
+    <br/>
+    <br/>
+    <a href="{{url_for('vote.homewr', oid=oid)}}">View the results of your Polls</a>
+    <br/>
+   </p>
+   <p style="color:White; font-family: sans-serif;">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            {{message}}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+   </p>
+   </div>
+   </div>
+{% endblock %}
